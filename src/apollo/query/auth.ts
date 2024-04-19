@@ -8,3 +8,21 @@ export const REGISTRATION = gql`
         }
     }
 `
+
+export const VERIFICATION = gql`
+    mutation VerifyPhone($verifyPhoneInput: VerifyPhoneInput!) {
+        verifyPhone(verifyPhoneInput: $verifyPhoneInput) {
+            message
+            success
+        }
+    }
+`
+export const LOGIN = gql`
+    mutation Login($loginInput: LoginInput!) {
+        login(loginInput: $loginInput) {
+        message
+        success
+        }
+    }
+`
+

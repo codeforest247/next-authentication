@@ -21,7 +21,7 @@ const handleSubmit = (e: any) => {
   e.preventDefault(); 
 }
 
-  const [user, setUser] = useState({
+const [user, setUser] = useState({
     name:'', number:'', email:'', password:''
 })
 
@@ -46,8 +46,6 @@ const handleInputs = (e: any) => {
     mutate({
         variables:formData
     })
-    
-    
 }
 
   //tailwind style class

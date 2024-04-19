@@ -1,10 +1,24 @@
 "use client";
-
+import { LOGIN } from '@/apollo/query/auth';
+import { Login } from '@/apollo/types/auth';
+import { useMutation } from '@apollo/client';
 import React, { useState } from 'react'
 
 function LoginForm() {
+// for backend
 
-  const [user, setUser] = useState({
+const [mutate, {loading}] = useMutation<Login>(LOGIN, {
+  onCompleted: (data) => {
+    console.log("LOGIN==>>", data);    
+  },
+  onError: (error) => {
+    console.log(error.message);
+  }
+})
+
+
+
+const [user, setUser] = useState({
     name:'', email:'', password:''
 })
 
@@ -12,10 +26,22 @@ const handleInputs = (e: any) => {
     const { name, value } = e.target;
     setUser({...user, [name]: value});
 }
+const handlePost = () => {
+  const {email, password} = user;
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault(); 
+  const formData = {
+    loginInput: {
+      password: password,
+      phoneOrEmail: email
+    }
   }
+  mutate({
+    variables: formData
+  })
+}
+const handleSubmit = (e: any) => {
+  e.preventDefault(); 
+ }
 
   const inputStyle = 'block w-full border-b-2 border-black py-1.5 text-black font-bold placeholder:text-black mb-3 focus:outline-none sm:text-sm sm:leading-6'
 
@@ -55,6 +81,7 @@ const handleInputs = (e: any) => {
           <input
             type="submit"
             value='Log In'
+            onClick={handlePost}
             className='bg-slate-900 px-9 py-3 cursor-pointer w-3/4 text-gray-100 rounded-full mb-3'
             />
             <br />

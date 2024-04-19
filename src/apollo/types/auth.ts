@@ -7,3 +7,11 @@ interface SuccessInfo {
 export interface Signup {
     signup: SuccessInfo
 }
+
+export interface VerifyPhone {
+  verifyPhone: SuccessInfo
+}
+
+export interface Login {
+  login: SuccessInfo
+}
